@@ -1,1 +1,8 @@
 streamlit==1.26.0
+nltk 
+spacy
+re
+nltk.sentiment.vader
+pandas
+os
+io
