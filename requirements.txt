@@ -1,7 +1,4 @@
 streamlit==1.26.0
-nltk 
+nltk
 spacy
-nltk.sentiment.vader
 pandas
-os
-io
