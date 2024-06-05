@@ -13,7 +13,17 @@ nltk.download('vader_lexicon')
 nltk.download('stopwords')
 nltk.download('punkt')
 
-nlp = spacy.load("en_core_web_sm")
+def load_spacy_model():
+    try:
+        return spacy.load("en_core_web_sm")
+    except OSError:
+        print("Downloading language model for the spaCy POS tagger")
+        from spacy.cli import download
+        download("en_core_web_sm")
+        return spacy.load("en_core_web_sm")
+
+nlp = load_spacy_model()
+
 sia = SentimentIntensityAnalyzer()
 custom_stopwords = set(stopwords.words('english')) - {"no", "not"}
 
