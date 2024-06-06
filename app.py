@@ -212,6 +212,7 @@ def plot_sentiment_trend_by_category(data):
             height=600,
             legend_title_text='Sentiment'
         )
+        st.plotly_chart(fig)
 
         plots[category] = pio.to_html(fig, full_html=False)
 
