@@ -12,26 +12,32 @@ import tarfile
 import urllib.request
 
 
-MODEL_URL = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1.tar.gz"
+MODEL_URL = "https://github.com/Abdullah-Kazi/nlp-pipeline/raw/1d34f53ef652286efa7e563a47c30825db20b745/en_core_web_sm-3.7.1.tar.gz"
 MODEL_PATH = "en_core_web_sm-3.7.1.tar.gz"
-EXTRACT_PATH = "./en_core_web_sm"
+EXTRACT_PATH = "./models/en_core_web_sm-3.7.1"
 
-@st.cache(allow_output_mutation=True)
-def setup_nlp_resources():
+@st.cache(allow_output_mutation=True, show_spinner=True)
+def download_and_setup_spacy_model():
+    # Check if the model tar file needs to be downloaded
+    if not os.path.exists(MODEL_PATH):
+        urllib.request.urlretrieve(MODEL_URL, MODEL_PATH)
+
+    # Extract the model if it hasn't been extracted
     if not os.path.exists(EXTRACT_PATH):
-        if not os.path.exists(MODEL_PATH):
-            urllib.request.urlretrieve(MODEL_URL, MODEL_PATH)
         with tarfile.open(MODEL_PATH, "r:gz") as tar:
             tar.extractall(path="./models")
+
+    # Load the model from the extracted path
     try:
-        nlp_model = spacy.load(EXTRACT_PATH)
+        nlp_model = load_model_from_path(EXTRACT_PATH)
     except Exception as e:
-        st.error(f"Failed to load spaCy model: {e}. Please check the model path.")
+        st.error(f"Failed to load spaCy model from extracted path: {e}")
         st.stop()
 
     return nlp_model
 
-nlp = setup_nlp_resources()
+# Load the model
+nlp = download_and_setup_spacy_model()
 
 def download_nltk_resources():
     nltk.download('stopwords')
