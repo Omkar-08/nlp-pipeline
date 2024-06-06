@@ -12,12 +12,6 @@ import plotly.io as pio
 import tarfile
 import urllib.request
 
-# Download the spaCy English model
-try:
-    spacy.cli.download("en_core_web_sm")
-except Exception as e:
-    st.error(f"Failed to download spaCy model: {e}")
-
 nlp = spacy.load("en_core_web_sm")
 
 def download_nltk_resources():
