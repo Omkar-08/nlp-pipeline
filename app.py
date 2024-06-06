@@ -10,13 +10,19 @@ import spacy
 import plotly.graph_objects as go
 
 @st.cache(allow_output_mutation=True)
-def load_nlp_resources():
+def setup_nlp_resources():
     nltk.download('vader_lexicon')
     nltk.download('stopwords')
     nltk.download('punkt')
-    return spacy.load("en_core_web_sm"), set(stopwords.words('english')) - {"no", "not"}
-
-nlp, custom_stopwords = load_nlp_resources()
+    try:
+        nlp_model = spacy.load("en_core_web_sm")
+    except Exception as e:
+        st.error(f"Failed to load spaCy model: {e}. Make sure you've installed it with: "
+                 "`python -m spacy download en_core_web_sm`")
+        st.stop()
+    custom_stopwords = set(stopwords.words('english')) - {"no", "not"}
+    return nlp_model, custom_stopwords
+nlp, custom_stopwords = setup_nlp_resources()
 
 def clean_text(text):
     contraction_mapping = {
