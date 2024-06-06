@@ -28,8 +28,12 @@ def setup_nlp_resources():
     except Exception as e:
         st.error(f"Failed to load spaCy model: {e}. Please check the model path.")
         st.stop()
+    try:
+        nltk.data.find('corpora/stopwords')
+    except LookupError:
+        nltk.download('stopwords')
+        
     nltk.download('vader_lexicon')
-    nltk.download('stopwords')
     nltk.download('punkt')
     custom_stopwords = set(stopwords.words('english')) - {"no", "not"}
     return nlp_model, custom_stopwords
