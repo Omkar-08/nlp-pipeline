@@ -233,7 +233,7 @@ def calculate_metrics(data):
 
     return monthly_metrics
 
-def plot_trend(data, category_name):
+def plot_trend(data):
     category_names = ['amenities', 'location', 'check-in', 'cleanliness', 'accuracy', 'communication']
     plots = {}
     for category in category_names:
