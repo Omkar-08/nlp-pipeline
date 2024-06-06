@@ -263,7 +263,6 @@ def plot_trend(data, category_name):
             margin=dict(l=50,r=50,b=100,t=100,pad=4))
         
         st.plotly_chart(fig)
-        plots[category] = pio.to_html(fig, full_html=False)
 
     return plots
 
@@ -291,20 +290,11 @@ def main():
 
         if not data.empty:
             st.write(data)
-
             plots = plot_sentiment_trend_by_category(data)
-            for category, plot in plots.items():
-                st.header(f"Sentiment Trend for {category.capitalize()}")
-                st.write(plot, unsafe_allow_html=True)
-
             metrics = calculate_metrics(data)
             st.header("Monthly Metrics by Category")
             st.write(metrics)
-
-            for category in ['amenities', 'location', 'check-in', 'cleanliness', 'accuracy', 'communication']:
-                category_metrics = metrics[metrics['category'] == category]
-                plot = plot_trend(category_metrics, category)
-                st.write(plot, unsafe_allow_html=True)
+            plot_trend(category_metrics, category)
         else:
             st.warning("No data to display after processing.")
     else:
