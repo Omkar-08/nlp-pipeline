@@ -260,7 +260,7 @@ def plot_trend(data, category_name):
             width=1800,
             height=600,
             margin=dict(l=50,r=50,b=100,t=100,pad=4))
-        
+        fig.show()
         plots[category] = pio.to_html(fig, full_html=False)
 
     return plots
