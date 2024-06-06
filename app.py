@@ -11,14 +11,10 @@ import plotly.graph_objects as go
 import tarfile
 import urllib.request
 
-def download_nltk_resources():
-    nltk.download('stopwords')
-    nltk.download('punkt')
-download_nltk_resources()
 
 MODEL_URL = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1.tar.gz"
 MODEL_PATH = "en_core_web_sm-3.7.1.tar.gz"
-EXTRACT_PATH = "./models/en_core_web_sm"
+EXTRACT_PATH = "./en_core_web_sm"
 
 @st.cache(allow_output_mutation=True)
 def setup_nlp_resources():
@@ -37,6 +33,11 @@ def setup_nlp_resources():
 
 nlp = setup_nlp_resources()
 
+def download_nltk_resources():
+    nltk.download('stopwords')
+    nltk.download('punkt')
+    nltk.download('vader_lexicon')
+download_nltk_resources()
 
 def clean_text(text):
     contraction_mapping = {
