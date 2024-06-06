@@ -8,10 +8,8 @@ import spacy
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
-
-nltk.download('vader_lexicon')
-nltk.download('stopwords')
-nltk.download('punkt')
+import os
+nltk.data.path.append(os.path.join(os.getcwd(), 'nltk_data'))
 
 def load_spacy_model():
     try:
