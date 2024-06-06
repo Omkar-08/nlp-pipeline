@@ -1,7 +1,7 @@
-streamlit==1.26.0
-nltk
+streamlit
 pandas
+nltk
+spacy
 plotly
-spacy==3.7.5
-https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1.tar.gz
+
 
