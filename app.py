@@ -11,8 +11,8 @@ import plotly.graph_objects as go
 import tarfile
 import urllib.request
 
-# Corrected URL for the .tar.gz file download (you need to replace this with the actual direct download URL)
-MODEL_URL = "https://github.com/Abdullah-Kazi/nlp-pipeline/en_core_web_sm-3.7.1.tar.gz"
+
+MODEL_URL = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1.tar.gz"
 MODEL_PATH = "en_core_web_sm-3.7.1.tar.gz"
 EXTRACT_PATH = "./models/en_core_web_sm"
 
