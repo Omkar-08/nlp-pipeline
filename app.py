@@ -251,7 +251,7 @@ def plot_trend(data):
         fig.add_trace(go.Scatter(x=year_month_labels, y=nps_values, mode='lines+markers', name='Trend Line', line=dict(color='red')))
 
         fig.update_layout(
-            title='{} NPS Metric Trend'.format(category_name.capitalize()),
+            title='{} NPS Metric Trend'.format(category.capitalize()),
             xaxis_title='Year-Month',
             yaxis_title='NPS-like Metric',
             xaxis=dict(
