@@ -11,11 +11,7 @@ import plotly.graph_objects as go
 import tarfile
 import urllib.request
 
-@st.cache_resource
-def load_model():
-    nlp = spacy.load("en_core_web_sm")
-    return nlp
-nlp = load_model()
+nlp = spacy.load("en_core_web_sm")
 
 def download_nltk_resources():
     nltk.download('stopwords')
