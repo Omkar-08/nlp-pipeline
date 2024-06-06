@@ -12,7 +12,7 @@ import tarfile
 import urllib.request
 
 
-MODEL_URL = "https://github.com/Abdullah-Kazi/nlp-pipeline/raw/1d34f53ef652286efa7e563a47c30825db20b745/en_core_web_sm-3.7.1.tar.gz"
+MODEL_URL = "https://github.com/Abdullah-Kazi/nlp-pipeline/blob/c4d9749b298294c3a3dc574388fab6782fe52438/en_core_web_sm-3.7.1.tar.gz"
 MODEL_PATH = "en_core_web_sm-3.7.1.tar.gz"
 EXTRACT_PATH = "./models/en_core_web_sm-3.7.1"
 
