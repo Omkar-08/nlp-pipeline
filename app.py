@@ -22,21 +22,28 @@ def download_and_setup_spacy_model():
     if not os.path.exists(EXTRACT_PATH):
         os.makedirs(EXTRACT_PATH)
 
-    # Check if the model tar file needs to be downloaded
-    if not os.path.exists(MODEL_PATH):
-        urllib.request.urlretrieve(MODEL_URL, MODEL_PATH)
+    # Download the model tar file if not present
+    if not os.path.exists(os.path.join(EXTRACT_PATH, MODEL_PATH)):
+        urllib.request.urlretrieve(MODEL_URL, os.path.join(EXTRACT_PATH, MODEL_PATH))
 
-    # Extract the model if it hasn't been extracted
+    # Define the model directory inside the extract path
     model_directory = os.path.join(EXTRACT_PATH, "en_core_web_sm-3.7.1")
+
+    # Extract the model if the directory doesn't exist
     if not os.path.exists(model_directory):
-        with tarfile.open(MODEL_PATH, "r:gz") as tar:
+        with tarfile.open(os.path.join(EXTRACT_PATH, MODEL_PATH), "r:gz") as tar:
             tar.extractall(path=EXTRACT_PATH)
+
+    # Check if the config file exists
+    if not os.path.exists(os.path.join(model_directory, "config.cfg")):
+        st.error("Model configuration file not found after extraction.")
+        st.stop()
 
     # Load the model from the extracted path
     try:
         nlp_model = spacy.load(model_directory)
     except Exception as e:
-        st.error(f"Failed to load spaCy model from extracted path: {e}")
+        st.error(f"Failed to load spaCy model from {model_directory}: {e}")
         st.stop()
 
     return nlp_model
