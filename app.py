@@ -294,7 +294,7 @@ def main():
             metrics = calculate_metrics(data)
             st.header("Monthly Metrics by Category")
             st.write(metrics)
-            plot_trend(category_metrics, category)
+            plot_trend(metrics)
         else:
             st.warning("No data to display after processing.")
     else:
