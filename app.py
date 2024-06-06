@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import os
-from processing_code import master_nlp, plot_sentiment_trend_by_category  # assuming your provided code is saved as processing_code.py
+from processing_code import master_nlp, plot_sentiment_trend_by_category
 
 # Initialization
 nltk.download('vader_lexicon')
