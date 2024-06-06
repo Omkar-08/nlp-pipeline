@@ -9,6 +9,22 @@ from nltk.tokenize import word_tokenize
 import spacy
 import plotly.graph_objects as go
 
+import os
+import tarfile
+import urllib.request
+
+MODEL_URL = "https://github.com/Abdullah-Kazi/nlp-pipeline/blob/1d34f53ef652286efa7e563a47c30825db20b745/en_core_web_sm-3.7.1.tar.gz"
+MODEL_PATH = "en_core_web_sm-3.7.1.tar.gz"
+EXTRACT_PATH = "./models"
+
+def download_and_extract_model():
+    if not os.path.exists(MODEL_PATH):
+        urllib.request.urlretrieve(MODEL_URL, MODEL_PATH)
+    if not os.path.exists(EXTRACT_PATH):
+        with tarfile.open(MODEL_PATH, "r:gz") as tar:
+            tar.extractall(path=EXTRACT_PATH)
+
+
 @st.cache(allow_output_mutation=True)
 def setup_nlp_resources():
     nltk.download('vader_lexicon')
