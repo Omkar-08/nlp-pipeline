@@ -11,6 +11,10 @@ import plotly.graph_objects as go
 import tarfile
 import urllib.request
 
+def download_nltk_resources():
+    nltk.download('stopwords')
+    nltk.download('punkt')
+download_nltk_resources()
 
 MODEL_URL = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1.tar.gz"
 MODEL_PATH = "en_core_web_sm-3.7.1.tar.gz"
@@ -28,19 +32,11 @@ def setup_nlp_resources():
     except Exception as e:
         st.error(f"Failed to load spaCy model: {e}. Please check the model path.")
         st.stop()
-    nltk_data_dir = 'nltk_data_dir'
-    if not os.path.exists(nltk_data_dir):
-        os.makedirs(nltk_data_dir)
-    nltk.data.path.append(nltk_data_dir)
-    
-    # Then download the data
-    nltk.download('stopwords', download_dir=nltk_data_dir)
-    nltk.download('vader_lexicon', download_dir=nltk_data_dir)
-    nltk.download('punkt', download_dir=nltk_data_dir)
-    custom_stopwords = set(stopwords.words('english')) - {"no", "not"}
-    return nlp_model, custom_stopwords
 
-nlp, custom_stopwords = setup_nlp_resources()
+    return nlp_model
+
+nlp = setup_nlp_resources()
+
 
 def clean_text(text):
     contraction_mapping = {
