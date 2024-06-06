@@ -14,9 +14,14 @@ import urllib.request
 nlp = spacy.load("en_core_web_sm")
 
 def download_nltk_resources():
-    nltk.download('stopwords')
-    nltk.download('punkt')
-    nltk.download('vader_lexicon')
+    import nltk
+    try:
+        nltk.download('stopwords', quiet=True)
+        nltk.download('punkt', quiet=True)
+        nltk.download('vader_lexicon', quiet=True)
+    except Exception as e:
+        # Log the error or use Streamlit's error message display
+        st.error(f"Failed to download NLTK resources: {e}")
 download_nltk_resources()
 
 def clean_text(text):
